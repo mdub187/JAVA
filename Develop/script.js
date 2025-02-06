@@ -1,11 +1,12 @@
 // Get a reference to the #add-employees-btn element
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
-
+const clearEmployeesbtn = document.getElementById('#clear-employee-btn')
 // Collect employee data
+var employeeTable = document.getElementsByClassName("employee-table");
 function collectEmployees() {
   const employeesArray = [];
   let addAnother = true;
-
+  // while loop to add employees
   while (addAnother) {
     const firstName = prompt("Please enter the employee's first name:");
     const lastName = prompt("Please enter the employee's last name:");
@@ -14,9 +15,19 @@ function collectEmployees() {
     // Ensure salary is a number
     salary = isNaN(salary) ? 0 : parseFloat(salary);
 
-    employeesArray.push({ firstName, lastName, salary });
+    employeesArray.push({firstName, lastName, salary});
 
     addAnother = confirm("Would you like to add another employee?");
+    // clear text function
+    function clearTableText(employeeTable) {
+      for (let i = 0; i < table.rows.length; i++) {
+        const row = table.rows[i];
+    
+        for (let j = 0; j < row.cells.length; j++) {
+          row.cells[j].innerHTML = "";
+        }
+      }
+    }
   }
 
   return employeesArray;
@@ -36,6 +47,7 @@ function getRandomEmployee(employeesArray) {
   const randomEmployee = employeesArray[randomIndex];
   console.log(`Congratulations to ${randomEmployee.firstName} ${randomEmployee.lastName}, our random drawing winner!`);
 }
+
 
 /*
   ====================
@@ -57,15 +69,18 @@ const displayEmployees = function (employeesArray) {
 
     const newTableRow = document.createElement('tr');
 
-    const firstNameCell = document.createElement('td.firstName');
+    const firstNameCell = document.createElement('td');
+    firstNameCell.className = "firstName"
     firstNameCell.textContent = currentEmployee.firstName;
     newTableRow.append(firstNameCell);
 
-    const lastNameCell = document.createElement('td.lastName');
+    const lastNameCell = document.createElement('td');
+    lastNameCell.className = "lastName"
     lastNameCell.textContent = currentEmployee.lastName;
     newTableRow.append(lastNameCell);
 
-    const salaryCell = document.createElement('td.salary');
+    const salaryCell = document.createElement('td');
+    salaryCell.className = "salary"
     // Format the salary as currency
     salaryCell.textContent = currentEmployee.salary.toLocaleString('en-US', {
       style: 'currency',
